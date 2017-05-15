@@ -6,11 +6,11 @@
 		$name = $request-> getAttribute('name');
 		$response->getBody()->write("Hello, $name");
 
-		return response;
+		return $response;
 	});
 
 	//accueil
 	$app->get('/', function(Request $request, Response $response) {
-		//return
+		return $this->view->render($response, 'index.html');
 	});
 ?>
