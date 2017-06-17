@@ -2,12 +2,18 @@
 	use \Psr\Http\Message\ServerRequestInterface as Request;
 	use \Psr\Http\Message\ResponseInterface as Response;
 
-	$app->get('/hello/{name}', function(Request $request, Response $response) {
-		$name = $request-> getAttribute('name');
-		$response->getBody()->write("Hello, $name");
+	$servername = "localhost";
+	$username 	= "root";
+	$password 	= "password";
+	$dbname		= "gitblog";
 
-		return $response;
-	});
+	try {
+		$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+		// set the PDO error mode to exception
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	} catch(PDOException $e) {
+		// TODO return error page
+	}
 
 	//accueil
 	$app->get('/', function(Request $request, Response $response) {
