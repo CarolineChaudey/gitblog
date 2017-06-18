@@ -121,163 +121,38 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<li><span class="filter" data-filter="web app logo card">photography</span></li>
 					</ul>
 				-->
+		<!-- bientôt remplacé par les données de la bdd -->
 		<div id="portfoliolist">
+			<?php
+				$new1 = array("title" => "l\'assoc MLP ouvre",
+											"subtitle" => "les poneys envahissent l'ESGI");
+				$new2 = array("title" => "Hervé en cure de désintox",
+											"subtitle" => "IL se remet d\'une overdose de cafféine.");
+				$new3 = array("title" => "Top 20 des tops les plus putaclic",
+											"subtitle" => "La 17e va vous étonner!");
+				$new4 = array("title" => "Il jette son bébé par la fenêtre",
+											"subtitle" => "Mais quand vous saurez pourquoi ...");
+				$new5 = array("title" => "lorem ipsum",
+											"subtitle" => "sid amet");
+				$news = [$new1, $new2, $new3, $new4, $new5];
+				foreach($news as $new) {
+			?>
 			<a class="popup-with-zoom-anim" href="#small-dialog">
 				<div class="portfolio logo1" data-cat="logo">
 					<div class="portfolio-wrapper">
 						<div class="label">
 							<div class="label-text">
-								<p class="text-title">Bird Document</p>
-								<span class="text-category">Logo</span>
+								<p class="text-title"><?php echo $new["title"] ?></p>
+								<span class="text-category"><?php echo $new["subtitle"] ?></span>
 							</div>
 							<div class="label-bg"></div>
 						</div>
 					</div>
 				</div>
 			</a>
-			<a class="popup-with-zoom-anim" href="#small-dialog">
-				<div class="portfolio app" data-cat="app">
-					<div class="portfolio-wrapper">
-						<div class="label">
-							<div class="label-text">
-								<p class="text-title">Visual Infography</p>
-								<span class="text-category">APP</span>
-							</div>
-							<div class="label-bg"></div>
-						</div>
-					</div>
-				</div>
-			</a>
-			<a class="popup-with-zoom-anim" href="#small-dialog">
-				<div class="portfolio web" data-cat="web">
-					<div class="portfolio-wrapper">
-						<div class="label">
-							<div class="label-text">
-								<p class="text-title">Sonor's Design</p>
-								<span class="text-category">Web design</span>
-							</div>
-							<div class="label-bg"></div>
-						</div>
-					</div>
-				</div>
-			</a>
-			<a class="popup-with-zoom-anim" href="#small-dialog">
-				<div class="portfolio card" data-cat="card">
-					<div class="portfolio-wrapper">
-						<div class="label">
-							<div class="label-text">
-								<p class="text-title">Typography Company</p>
-								<span class="text-category">Business card</span>
-							</div>
-							<div class="label-bg"></div>
-						</div>
-					</div>
-				</div>
-			</a>
-			<a class="popup-with-zoom-anim" href="#small-dialog">
-				<div class="portfolio app" data-cat="app">
-					<div class="portfolio-wrapper">
-						<div class="label">
-							<div class="label-text">
-								<p class="text-title">Weatherette</p>
-								<span class="text-category">APP</span>
-							</div>
-							<div class="label-bg"></div>
-						</div>
-					</div>
-				</div>
-			</a>
-			<a class="popup-with-zoom-anim" href="#small-dialog">
-				<div class="portfolio card" data-cat="card">
-					<div class="portfolio-wrapper">
-						<div class="label">
-							<div class="label-text">
-								<p class="text-title">BMF</p>
-								<span class="text-category">Business card</span>
-							</div>
-							<div class="label-bg"></div>
-						</div>
-					</div>
-				</div>
-			</a>
-			<a class="popup-with-zoom-anim" href="#small-dialog">
-				<div class="portfolio card" data-cat="card">
-					<div class="portfolio-wrapper">
-						<div class="label">
-							<div class="label-text">
-								<p class="text-title">Techlion</p>
-								<span class="text-category">Business card</span>
-							</div>
-							<div class="label-bg"></div>
-						</div>
-					</div>
-				</div>
-			</a>
-			<a class="popup-with-zoom-anim" href="#small-dialog">
-				<div class="portfolio logo1" data-cat="logo">
-					<div class="portfolio-wrapper">
-						<div class="label">
-							<div class="label-text">
-								<p class="text-title">KittyPic</p>
-								<span class="text-category">Logo</span>
-							</div>
-							<div class="label-bg"></div>
-						</div>
-					</div>
-				</div>
-			</a>
-			<a class="popup-with-zoom-anim" href="#small-dialog">
-				<div class="portfolio app" data-cat="app">
-					<div class="portfolio-wrapper">
-						<div class="label">
-							<div class="label-text">
-								<p class="text-title">Graph Plotting</p>
-								<span class="text-category">APP</span>
-							</div>
-							<div class="label-bg"></div>
-						</div>
-					</div>
-				</div>
-			</a>
-			<a class="popup-with-zoom-anim" href="#small-dialog">
-				<div class="portfolio web" data-cat="web">
-					<div class="portfolio-wrapper">
-						<div class="label">
-							<div class="label-text">
-								<p class="text-title">Student Guide</p>
-								<span class="text-category">Web design</span>
-							</div>
-							<div class="label-bg"></div>
-						</div>
-					</div>
-				</div>
-			</a>
-			<a class="popup-with-zoom-anim" href="#small-dialog">
-				<div class="portfolio icon" data-cat="icon">
-					<div class="portfolio-wrapper">
-						<div class="label">
-							<div class="label-text">
-								<p class="text-title">Scoccer</p>
-								<span class="text-category">Icon</span>
-							</div>
-							<div class="label-bg"></div>
-						</div>
-					</div>
-				</div>
-			</a>
-			<a class="popup-with-zoom-anim" href="#small-dialog">
-				<div class="portfolio icon" data-cat="icon">
-					<div class="portfolio-wrapper">
-						<div class="label">
-							<div class="label-text">
-								<p class="text-title">3D Map</p>
-								<span class="text-category">Icon</span>
-							</div>
-							<div class="label-bg"></div>
-						</div>
-					</div>
-				</div>
-			</a>
+			<?php
+				}
+			?>
 		</div>
 	</div><!-- end container -->
 	</div>
