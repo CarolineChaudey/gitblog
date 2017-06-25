@@ -19,4 +19,10 @@
 	$app->get('/', function(Request $request, Response $response) {
 		return $this->view->render($response, 'index.html');
 	});
+
+	//inscription
+	$app->get('/join', function(Request $request, Response $response) {
+		return $this->view->render($response, 'join.html');
+	});
+
 ?>
