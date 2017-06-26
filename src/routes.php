@@ -32,6 +32,17 @@
 		if ($formVerif->verifyData($_POST) === false) {
 			return "error";
 		}
+		$query = "insert into User('username', 'email', 'password', 'role') "
+							. "values("
+							. $_POST["login"] . ", "
+							. $_POST["email"] . ", "
+							. $_POST["pswd"] . ", "
+							. "user"
+							. ");";
+		$result = $conn->exec($query);
+		if ($result !== 1) {
+			return "error";
+		}
 		return $this->view->render($response, 'index.html');
 	});
 
