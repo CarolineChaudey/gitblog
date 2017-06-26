@@ -1,6 +1,7 @@
 <?php
 	use \Psr\Http\Message\ServerRequestInterface as Request;
 	use \Psr\Http\Message\ResponseInterface as Response;
+	require 'form-verif.php';
 
 	$servername = "localhost";
 	$username 	= "root";
@@ -27,6 +28,10 @@
 
 	//inscription
 	$app->post('/join-handle', function(Request $request, Response $response) {
+		$formVerif = new FormVerif;
+		if ($formVerif->verifyData($_POST) === false) {
+			return "error";
+		}
 		return $this->view->render($response, 'index.html');
 	});
 
