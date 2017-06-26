@@ -25,4 +25,9 @@
 		return $this->view->render($response, 'join.html');
 	});
 
+	//inscription
+	$app->post('/join-handle', function(Request $request, Response $response) {
+		return $this->view->render($response, 'index.html');
+	});
+
 ?>

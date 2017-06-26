@@ -42,11 +42,12 @@
   <div class="main_bg">
     <div class="wrap">
     	<div class="main">
-        <form class="form register-form">
+        <?php $formHandler = "http://" . $_SERVER['SERVER_NAME'] . ":" .  $_SERVER['SERVER_PORT'] . "/join-handle"; ?>
+        <form class="form register-form" action="<?php echo $formHandler; ?>" method="post">
           <input type="email" name="email" placeholder="email"/>
           <input type="text" name="login" placeholder="login"/>
           <input type="password" name="pswd" placeholder="password"/>
-          <button>inscription</button>
+          <input type="submit" name="inscription"/>
         </form>
       </div>
     </div>
