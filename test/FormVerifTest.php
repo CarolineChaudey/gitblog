@@ -9,26 +9,27 @@
 
   final class FormVerifTest extends TestCase
   {
-    // verifyData
-    public function verifyData_ok() {
-
-    }
-
-    public function verifyData_error() {
-
-    }
     // areOK
-    public function areOK_ok() {
-
+    public function testVerifyData_ok() {
+      $list = ["test1", "test2", "test3"];
+      $this->assertEquals((new FormVerif())->verifyData($list), true);
     }
 
-    public function areOK_withNullOrEmpty() {
-
+    public function testVerifyData_withNull() {
+      $list = ["test1", "test2", null];
+      $this->assertEquals((new FormVerif())->verifyData($list), false);
     }
 
-    public function areOK_withBlankspace() {
-
+    public function testVerifyData_withEmpty() {
+      $list = ["test1", "test2", ""];
+      $this->assertEquals((new FormVerif())->verifyData($list), false);
     }
+
+    public function testVerifyData_withBlankspace() {
+      $list = ["test1", "test2", "    "];
+      $this->assertEquals((new FormVerif())->verifyData($list), false);
+    }
+
     // isNullOrEmpty
     public function testIsNullOrEmpty_ok() {
       $this->assertEquals(FormVerif::isNullOrEmpty("test"), false);
@@ -41,9 +42,9 @@
     public function testIsNullOrEmpty_null() {
       $this->assertEquals(FormVerif::isNullOrEmpty(null), true);
     }
-    // hasNoBlankSpace
 
-    public function hasNoBlankSpace_error() {
+    // hasNoBlankSpace
+    public function testHasNoBlankSpace_error() {
       // at start
       $this->assertEquals(FormVerif::hasNoBlankSpace(" test"), false);
       // in the middle
@@ -54,7 +55,7 @@
       $this->assertEquals(FormVerif::hasNoBlankSpace("    "), false);
     }
 
-    public function hasNoBlankSpace_ok() {
+    public function testHasNoBlankSpace_ok() {
       $this->assertEquals(FormVerif::hasNoBlankSpace("test"), true);
     }
   }

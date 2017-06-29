@@ -2,14 +2,7 @@
 
   class FormVerif  {
 
-    function verifyData($data) {
-      if ($this->areOK($data)) {
-        return true;
-      }
-      return false;
-    }
-
-    function areOK($list) {
+    function verifyData($list) {
       foreach ($list as $key => $value) {
         if ($this->isNullOrEmpty($value)) {
           return false;
