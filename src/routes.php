@@ -4,27 +4,15 @@
 	require 'FormVerif.php';
 	require 'Security.php';
 
-	$servername = "localhost";
-	$username 	= "root";
-	$password 	= "xxx";
-	$dbname		= "gitblog";
-
-	try {
-		$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-		// set the PDO error mode to exception
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	} catch(PDOException $e) {
-		// TODO return error page
-	}
 
 	//accueil
 	$app->get('/', function(Request $request, Response $response) {
-		return $this->view->render($response, 'index.html');
+		return $this->view->render($response, 'index.phtml');
 	});
 
 	//inscription
 	$app->get('/join', function(Request $request, Response $response) {
-		return $this->view->render($response, 'join.html');
+		return $this->view->render($response, 'join.phtml');
 	});
 
 	//inscription
@@ -35,7 +23,10 @@
 		}
 		$security = new Security;
 		$_POST["pswd"] = $security->cryptPassword($_POST["pswd"]);
-		/*
+		
+		// Récuperation de la connection
+		$conn = new DataBase();
+		
 		$query = "insert into User('username', 'email', 'password', 'role') "
 							. "values("
 							. $_POST["login"] . ", "
@@ -47,8 +38,8 @@
 		if ($result !== 1) {
 			return "error : l'inscription a échoué.";
 		}
-		*/
-		return $this->view->render($response, 'index.html');
+		
+		return $this->view->render($response, 'index.phtml');
 	});
 
 ?>
