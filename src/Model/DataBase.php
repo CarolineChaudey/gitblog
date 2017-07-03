@@ -7,13 +7,13 @@
  * Time: 18:28
  */
 class DataBase {
-	
+
 	// Database object
 	private $dataBase;
 
 	private $servername = "localhost";
 	private $username 	= "root";
-	private $password 	= "xxx";
+	private $password 	= "XXX";
 	private $dbname		= "gitblog";
 
 
@@ -24,7 +24,12 @@ class DataBase {
 			$this->dataBase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 		} catch(PDOException $e) {
 			// TODO return error page
+			return "error initializing connection.";
 		}
 	}
-	
+
+	public function getDataBase() {
+		return $this->dataBase;
+	}
+
 }

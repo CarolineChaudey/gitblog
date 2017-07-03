@@ -3,6 +3,7 @@
 	use \Psr\Http\Message\ResponseInterface as Response;
 	require 'FormVerif.php';
 	require 'Security.php';
+	require 'Model/DataBase.php';
 
 
 	//accueil
@@ -23,10 +24,10 @@
 		}
 		$security = new Security;
 		$_POST["pswd"] = $security->cryptPassword($_POST["pswd"]);
-		
+
 		// Récuperation de la connection
 		$conn = new DataBase();
-		
+
 		$query = "insert into User('username', 'email', 'password', 'role') "
 							. "values("
 							. $_POST["login"] . ", "
@@ -34,11 +35,11 @@
 							. $_POST["pswd"] . ", "
 							. "user"
 							. ");";
-		$result = $conn->exec($query);
+		$result = $conn->getDataBase()->exec($query);
 		if ($result !== 1) {
 			return "error : l'inscription a échoué.";
 		}
-		
+
 		return $this->view->render($response, 'index.phtml');
 	});
 
