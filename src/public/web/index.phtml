@@ -86,18 +86,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="wrap">
 	<div class="header">
 		<div class="logo">
-			<h1><a href="index.html"><img src="images/logo.png" alt=""/></a></h1>
+			<h1><a href="index.phtml"><img src="images/logo.png" alt=""/></a></h1>
 		</div>
 		<div class="h_left">
 			<h2>Bienvenue sur le Gitblog</h2>
 			<h3>Un site où lire (et parfois écrire) des articles.</h3>
 		</div>
+		<?php $basePath = "http://" . $_SERVER['SERVER_NAME'] . ":" .  $_SERVER['SERVER_PORT']; ?>
 		<div class="h_right">
 			<ul class="menu">
-				<li class="active"><a href="index.html">home</a></li>
-				<li><a href="about.html">rédiger un article</a></li>
-				<li><a href="portfolio.html">connexion</a></li>
-				<li><a href="contact.html">inscription</a></li>
+				<li class="active"><a href="index.phtml">home</a></li>
+				<li><a href="">rédiger un article</a></li>
+				<li><a href="portfolio.phtml">connexion</a></li>
+				<li><a href="/join">inscription</a></li>
 			</ul>
 		</div>
 		<div class="clear"></div>
