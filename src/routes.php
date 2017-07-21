@@ -16,7 +16,11 @@
 		return $this->view->render($response, 'join.phtml');
 	});
 
-	//inscription
+	//connexion
+	$app->get('/login', function(Request $request, Response $response) {
+		return $this->view->render($response, 'login.phtml');
+	});
+
 	$app->post('/join-handle', function(Request $request, Response $response) {
 		$formVerif = new FormVerif;
 		if ($formVerif->verifyData($_POST) === false) {
@@ -43,4 +47,15 @@
 		return $this->view->render($response, 'index.phtml');
 	});
 
-?>
+	$app->post('/login-handle', function(Request $request, Response $response) {
+		$security = new Security;
+		$_POST["pswd"] = $security->cryptPassword($_POST["pswd"]);
+
+		$conn = new DataBase();
+		$query = "select * "
+							. "from User "
+							. "where username = " . $POST["login"] . " "
+							. "and password = " . $POST["pswd"] . " "
+							. ";";
+		return $this->view->render($response, 'index.phtml');
+	});
