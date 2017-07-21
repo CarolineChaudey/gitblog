@@ -2,12 +2,21 @@
 
   class FormVerif  {
 
-    function verifyData($list) {
+    function verifyJoinData($list) {
       foreach ($list as $key => $value) {
         if ($this->isNullOrEmpty($value)) {
           return false;
         }
         if (!$this->hasNoBlankSpace($value)) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function verifyLoginData($list) {
+      foreach ($list as $key => $value) {
+        if ($this->isNullOrEmpty($value)) {
           return false;
         }
       }

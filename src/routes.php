@@ -16,12 +16,18 @@
 		return $this->view->render($response, 'join.phtml');
 	});
 
-	//inscription
+	//connexion
+	$app->get('/login', function(Request $request, Response $response) {
+		return $this->view->render($response, 'login.phtml');
+	});
+
 	$app->post('/join-handle', function(Request $request, Response $response) {
+		//verification
 		$formVerif = new FormVerif;
-		if ($formVerif->verifyData($_POST) === false) {
+		if ($formVerif->verifyJoinData($_POST) === false) {
 			return "error : les champs n'ont pas correctement été remplis.";
 		}
+		// cryptage mdp
 		$security = new Security;
 		$_POST["pswd"] = $security->cryptPassword($_POST["pswd"]);
 
@@ -43,4 +49,27 @@
 		return $this->view->render($response, 'index.phtml');
 	});
 
-?>
+	$app->post('/login-handle', function(Request $request, Response $response) {
+		// verification
+		$formVerif = new FormVerif;
+		if ($formVerif->verifyLoginData($_POST) === false) {
+			return "error : les champs n'ont pas tous été remplis.";
+		}
+		//cryptage mdp
+		$security = new Security;
+		$_POST["pswd"] = $security->cryptPassword($_POST["pswd"]);
+
+		// Récuperation de la connection
+		$conn = new DataBase();
+		$query = "select * "
+							. "from User "
+							. "where username = " . $POST["login"] . " "
+							. "and password = " . $POST["pswd"] . " "
+							. ";";
+		$result = $conn->getDataBase()->exec($query);
+		if (!$result) {
+			return "Mauvais login et/ou mot de passe";
+		}
+
+		return $this->view->render($response, 'index.phtml');
+	});

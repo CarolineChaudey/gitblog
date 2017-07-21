@@ -9,25 +9,41 @@
 
   final class FormVerifTest extends TestCase
   {
-    // areOK
-    public function testVerifyData_ok() {
+    // verifyJoinData
+    public function testVerifyJoinData_ok() {
       $list = ["test1", "test2", "test3"];
-      $this->assertEquals((new FormVerif())->verifyData($list), true);
+      $this->assertEquals((new FormVerif())->verifyJoinData($list), true);
     }
 
-    public function testVerifyData_withNull() {
+    public function testVerifyJoinData_withNull() {
       $list = ["test1", "test2", null];
-      $this->assertEquals((new FormVerif())->verifyData($list), false);
+      $this->assertEquals((new FormVerif())->verifyJoinData($list), false);
     }
 
-    public function testVerifyData_withEmpty() {
+    public function testVerifyJoinData_withEmpty() {
       $list = ["test1", "test2", ""];
-      $this->assertEquals((new FormVerif())->verifyData($list), false);
+      $this->assertEquals((new FormVerif())->verifyJoinData($list), false);
     }
 
-    public function testVerifyData_withBlankspace() {
+    public function testVerifyJoinData_withBlankspace() {
       $list = ["test1", "test2", "    "];
-      $this->assertEquals((new FormVerif())->verifyData($list), false);
+      $this->assertEquals((new FormVerif())->verifyJoinData($list), false);
+    }
+
+    //verifyLoginData
+    public function testVerifyLoginData_ok() {
+      $list = ["test1", "test2", "test3"];
+      $this->assertEquals((new FormVerif())->verifyLoginData($list), true);
+    }
+
+    public function testVerifyLoginData_withNull() {
+      $list = ["test1", "test2", null];
+      $this->assertEquals((new FormVerif())->verifyLoginData($list), false);
+    }
+
+    public function testVerifyLoginData_withEmpty() {
+      $list = ["test1", "test2", ""];
+      $this->assertEquals((new FormVerif())->verifyLoginData($list), false);
     }
 
     // isNullOrEmpty
