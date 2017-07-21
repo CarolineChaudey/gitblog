@@ -23,7 +23,7 @@
 
 	$app->post('/join-handle', function(Request $request, Response $response) {
 		$formVerif = new FormVerif;
-		if ($formVerif->verifyData($_POST) === false) {
+		if ($formVerif->verifyJoinData($_POST) === false) {
 			return "error : les champs n'ont pas correctement été remplis.";
 		}
 		$security = new Security;
@@ -48,6 +48,11 @@
 	});
 
 	$app->post('/login-handle', function(Request $request, Response $response) {
+		$formVerif = new FormVerif;
+		if ($formVerif->verifyLoginData($_POST) === false) {
+			return "error : les champs n'ont pas tous été remplis.";
+		}
+
 		$security = new Security;
 		$_POST["pswd"] = $security->cryptPassword($_POST["pswd"]);
 
