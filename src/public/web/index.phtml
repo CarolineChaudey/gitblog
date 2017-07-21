@@ -7,17 +7,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>The Gitblog | Home</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
-<link href="src/public/web/css/style.css" rel="stylesheet" type="text/css" media="all" />
-<!--  jquery plguin -->
-<script type="text/javascript" src="src/public/web/js/jquery.min.js"></script>
-<!-- start gallery -->
-	<script type="text/javascript" src="src/public/web/js/jquery.easing.min.js"></script>
-	<script type="text/javascript" src="src/public/web/js/jquery.mixitup.min.js"></script>
+	<title>The Gitblog | Home</title>
+	<?php include 'includes.phtml' ?>
+
 	<script type="text/javascript">
+
 	$(function () {
 
 		var filterList = {
@@ -81,46 +75,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 </head>
 <body>
-<!-- start header -->
-<div class="header_bg">
-<div class="wrap">
-	<div class="header">
-		<div class="logo">
-			<h1><a href="index.phtml"><img src="images/logo.png" alt=""/></a></h1>
-		</div>
-		<div class="h_left">
-			<h2>Bienvenue sur le Gitblog</h2>
-			<h3>Un site où lire (et parfois écrire) des articles.</h3>
-		</div>
-		<div class="h_right">
-			<ul class="menu">
-				<li class="active"><a href="index.phtml">home</a></li>
-				<li><a href="">rédiger un article</a></li>
-				<li><a href="/login">connexion</a></li>
-				<li><a href="/join">inscription</a></li>
-			</ul>
-		</div>
-		<div class="clear"></div>
-	</div>
-</div>
-</div>
+ <?php include 'header.phtml' ?>
 <!-- start main -->
 <div class="main_bg">
 <div class="wrap">
 	<div class="main">
 		<!-- start gallery  -->
 			<div class="container">
-				<!-- no categories for now
-					<ul id="filters" class="clearfix">
-						<li><span class="filter active" data-filter="app card icon logo web">All</span></li> /
-						<li><span class="filter" data-filter="app card logo">design</span></li> /
-						<li><span class="filter" data-filter="card app web icon">branding</span></li> /
-						<li><span class="filter" data-filter="icon web app">graphic</span></li> /
-						<li><span class="filter" data-filter="logo app">animation</span></li> /
-						<li><span class="filter" data-filter="web app card logo icon">illustration</span></li> /
-						<li><span class="filter" data-filter="web app logo card">photography</span></li>
-					</ul>
-				-->
 		<!-- bientôt remplacé par les données de la bdd -->
 		<div id="portfoliolist">
 			<?php
