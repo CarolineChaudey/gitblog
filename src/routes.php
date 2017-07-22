@@ -4,10 +4,12 @@
 	require 'FormVerif.php';
 	require 'Security.php';
 	require 'Model/DataBase.php';
-
-
+	require 'Mapper/News.php';
+	
+	
 	//accueil
 	$app->get('/', function(Request $request, Response $response) {
+		$this->view->news = (new News())->getAllNews();
 		return $this->view->render($response, 'index.phtml');
 	});
 
@@ -22,26 +24,16 @@
 	});
 
 	$app->post('/join-handle', function(Request $request, Response $response) {
-		//verification
-		$formVerif = new FormVerif;
-		if ($formVerif->verifyJoinData($_POST) === false) {
-			return "error : les champs n'ont pas correctement été remplis.";
-		}
-		// cryptage mdp
-		$security = new Security;
-		$_POST["pswd"] = $security->cryptPassword($_POST["pswd"]);
-
 		// Récuperation de la connection
-		$conn = new DataBase();
+		$conn = (new DataBase())->getDataBase();
 
-		$query = "insert into User('username', 'email', 'password', 'role') "
-							. "values("
-							. $_POST["login"] . ", "
-							. $_POST["email"] . ", "
-							. $_POST["pswd"] . ", "
-							. "user"
-							. ");";
-		$result = $conn->getDataBase()->exec($query);
+		$query = "insert into User(username, email, password, role) values(:username,:email,:password,'user')";
+		$result = $conn->prepare($query);
+		$result->execute(array(
+				'username' => $_POST['login'],
+				'email'	=> $_POST['email'],
+				'password' => cryptPassword($_POST["pswd"])
+		));
 		if ($result !== 1) {
 			return "error : l'inscription a échoué.";
 		}
@@ -50,23 +42,18 @@
 	});
 
 	$app->post('/login-handle', function(Request $request, Response $response) {
-		// verification
-		$formVerif = new FormVerif;
-		if ($formVerif->verifyLoginData($_POST) === false) {
-			return "error : les champs n'ont pas tous été remplis.";
-		}
+		
 		//cryptage mdp
-		$security = new Security;
-		$_POST["pswd"] = $security->cryptPassword($_POST["pswd"]);
+		$_POST["pswd"] = cryptPassword($_POST["pswd"]);
 
 		// Récuperation de la connection
-		$conn = new DataBase();
+		$conn = (new DataBase())->getDataBase();
 		$query = "select * "
 							. "from User "
-							. "where username = " . $POST["login"] . " "
-							. "and password = " . $POST["pswd"] . " "
+							. "where username = " . $_POST["login"] . " "
+							. "and password = " . $_POST["pswd"] . " "
 							. ";";
-		$result = $conn->getDataBase()->exec($query);
+		$result = $conn->exec($query);
 		if (!$result) {
 			return "Mauvais login et/ou mot de passe";
 		}

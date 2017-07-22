@@ -1,10 +1,5 @@
 <?php
-
-  class Security
-  {
-    function cryptPassword($pswd) {
-      return password_hash($pswd, PASSWORD_BCRYPT);
+function cryptPassword($pswd) {
+      return md5($pswd . "sdmf3d!§&érfds<");
     }
-  }
-
 ?>
