@@ -85,9 +85,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<!-- bientôt remplacé par les données de la bdd -->
 		<div id="portfoliolist">
 			<?php
-				foreach($this->news as $new) {
+				foreach($this->news as $new) :
 			?>
-			<a class="popup-with-zoom-anim" href="#small-dialog">
+			<a href="/new?id=<?php echo $new['id'] ?>">
 				<div class="portfolio logo1" data-cat="logo">
 					<div class="portfolio-wrapper">
 						<div class="label">
@@ -101,7 +101,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 			</a>
 			<?php
-				}
+				endforeach;
 			?>
 		</div>
 	</div><!-- end container -->
