@@ -18,12 +18,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<div class="main">
 		<!-- start gallery  -->
 		<div class="container">
-		
-			<p class="text-title"><?php echo $this->new["title"] ?></p>
-			<span class="text-category"><?php echo $this->new["contenu"] ?></span><br>
+			<form class="form register-form" action="/applyadd" method="post">
+
+				<input id="title" name="title" class="text-category" >
+				<br>
+				<textarea id="content" name="content" class="text-category" ></textarea>
+				<br>
+				<input type="submit" name="inscription"/>
+			</form>
 		</div>
-		<a href="/modify?id=<?php echo $this->new["id"]?>"><button>modifier</button></a>
-		<a href="/remove?id=<?php echo $this->new["id"]?>"><button>supprimer</button></a>
 	</div>
 </div>
 </div>

@@ -24,15 +24,34 @@
 		return $this->view->render($response, 'new.phtml');
 	});
 	
-	//affichage d'une new
+	//ajout d'une new
+	$app->get('/addnew', function(Request $request, Response $response) {
+		return $this->view->render($response, 'add.phtml');
+	});
+	
+	//application de l'ajout
+	$app->post('/applyadd', function(Request $request, Response $response) use ($app) {
+		(new News())->createNew($_POST['title'], $_POST['content']);
+		return $response->withStatus(302)->withHeader('Location', '/');
+		//return $this->view->render($response, 'index.phtml');
+	});
+	
+	//page modification d'une new
 	$app->get('/modify', function(Request $request, Response $response) {
 		$this->view->new = (new News())->getNew($_GET['id']);
 		return $this->view->render($response, 'modify.phtml');
 	});
 	
-	//affichage d'une new
+	//application de lamodification
 	$app->post('/applymodify', function(Request $request, Response $response) use ($app) {
 		(new News())->updateNew($_GET['id'],$_POST['title'], $_POST['content']);
+		return $response->withStatus(302)->withHeader('Location', '/new?id='.$_GET['id']);
+		//return $this->view->render($response, 'index.phtml');
+	});
+	
+	//suppression
+	$app->get('/remove', function(Request $request, Response $response) use ($app) {
+		(new News())->removeNew($_GET['id']);
 		return $response->withStatus(302)->withHeader('Location', '/');
 		//return $this->view->render($response, 'index.phtml');
 	});
