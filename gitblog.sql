@@ -2,7 +2,7 @@ CREATE TABLE `Comment` (
   `id` int(10) NOT NULL,
   `content` longtext COLLATE utf8_unicode_ci NOT NULL,
   `created_date` datetime NOT NULL,
-  `update_date` datetime NOT NULL,
+  `update_date` datetime ,
   `post_id` int(10) NOT NULL,
   `author_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -12,9 +12,9 @@ CREATE TABLE `Post` (
   `title` varchar(45) NOT NULL,
   `contenu` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_date` datetime NOT NULL,
+  `update_date` datetime ,
   `autor_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8_unicode_ci;
 
 CREATE TABLE `User` (
   `id` int(10) NOT NULL,

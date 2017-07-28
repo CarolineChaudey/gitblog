@@ -84,27 +84,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="container">
 		<!-- bientôt remplacé par les données de la bdd -->
 		<div id="portfoliolist">
+
+			<a href="/addnew"><button>ajouter</button></a>
 			<?php
-				$new1 = array("title" => "l\'assoc MLP ouvre",
-											"subtitle" => "les poneys envahissent l'ESGI");
-				$new2 = array("title" => "Hervé en cure de désintox",
-											"subtitle" => "IL se remet d\'une overdose de cafféine.");
-				$new3 = array("title" => "Top 20 des tops les plus putaclic",
-											"subtitle" => "La 17e va vous étonner!");
-				$new4 = array("title" => "Il jette son bébé par la fenêtre",
-											"subtitle" => "Mais quand vous saurez pourquoi ...");
-				$new5 = array("title" => "lorem ipsum",
-											"subtitle" => "sid amet");
-				$news = [$new1, $new2, $new3, $new4, $new5];
-				foreach($news as $new) {
+				foreach($this->news as $new) :
 			?>
-			<a class="popup-with-zoom-anim" href="#small-dialog">
+			<a href="/new?id=<?php echo $new['id'] ?>">
 				<div class="portfolio logo1" data-cat="logo">
 					<div class="portfolio-wrapper">
 						<div class="label">
 							<div class="label-text">
 								<p class="text-title"><?php echo $new["title"] ?></p>
-								<span class="text-category"><?php echo $new["subtitle"] ?></span>
+								<span class="text-category"><?php echo $new["contenu"] ?></span>
 							</div>
 							<div class="label-bg"></div>
 						</div>
@@ -112,7 +103,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 			</a>
 			<?php
-				}
+				endforeach;
 			?>
 		</div>
 	</div><!-- end container -->

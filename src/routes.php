@@ -4,44 +4,74 @@
 	require 'FormVerif.php';
 	require 'Security.php';
 	require 'Model/DataBase.php';
-
-
+	require 'Mapper/News.php';
+	
+	
 	//accueil
 	$app->get('/', function(Request $request, Response $response) {
+		$this->view->news = (new News())->getAllNews();
 		return $this->view->render($response, 'index.phtml');
 	});
-
+	
 	//inscription
 	$app->get('/join', function(Request $request, Response $response) {
 		return $this->view->render($response, 'join.phtml');
 	});
-
+	
+	//affichage d'une new
+	$app->get('/new', function(Request $request, Response $response) {
+		$this->view->new = (new News())->getNew($_GET['id']);
+		return $this->view->render($response, 'new.phtml');
+	});
+	
+	//ajout d'une new
+	$app->get('/addnew', function(Request $request, Response $response) {
+		return $this->view->render($response, 'add.phtml');
+	});
+	
+	//application de l'ajout
+	$app->post('/applyadd', function(Request $request, Response $response) use ($app) {
+		(new News())->createNew($_POST['title'], $_POST['content']);
+		return $response->withStatus(302)->withHeader('Location', '/');
+		//return $this->view->render($response, 'index.phtml');
+	});
+	
+	//page modification d'une new
+	$app->get('/modify', function(Request $request, Response $response) {
+		$this->view->new = (new News())->getNew($_GET['id']);
+		return $this->view->render($response, 'modify.phtml');
+	});
+	
+	//application de lamodification
+	$app->post('/applymodify', function(Request $request, Response $response) use ($app) {
+		(new News())->updateNew($_GET['id'],$_POST['title'], $_POST['content']);
+		return $response->withStatus(302)->withHeader('Location', '/new?id='.$_GET['id']);
+		//return $this->view->render($response, 'index.phtml');
+	});
+	
+	//suppression
+	$app->get('/remove', function(Request $request, Response $response) use ($app) {
+		(new News())->removeNew($_GET['id']);
+		return $response->withStatus(302)->withHeader('Location', '/');
+		//return $this->view->render($response, 'index.phtml');
+	});
+	
 	//connexion
 	$app->get('/login', function(Request $request, Response $response) {
 		return $this->view->render($response, 'login.phtml');
 	});
 
 	$app->post('/join-handle', function(Request $request, Response $response) {
-		//verification
-		$formVerif = new FormVerif;
-		if ($formVerif->verifyJoinData($_POST) === false) {
-			return "error : les champs n'ont pas correctement été remplis.";
-		}
-		// cryptage mdp
-		$security = new Security;
-		$_POST["pswd"] = $security->cryptPassword($_POST["pswd"]);
-
 		// Récuperation de la connection
-		$conn = new DataBase();
+		$conn = (new DataBase())->getDataBase();
 
-		$query = "insert into User('username', 'email', 'password', 'role') "
-							. "values("
-							. $_POST["login"] . ", "
-							. $_POST["email"] . ", "
-							. $_POST["pswd"] . ", "
-							. "user"
-							. ");";
-		$result = $conn->getDataBase()->exec($query);
+		$query = "insert into User(username, email, password, role) values(:username,:email,:password,'user')";
+		$result = $conn->prepare($query);
+		$result->execute(array(
+				'username' => $_POST['login'],
+				'email'	=> $_POST['email'],
+				'password' => cryptPassword($_POST["pswd"])
+		));
 		if ($result !== 1) {
 			return "error : l'inscription a échoué.";
 		}
@@ -50,23 +80,18 @@
 	});
 
 	$app->post('/login-handle', function(Request $request, Response $response) {
-		// verification
-		$formVerif = new FormVerif;
-		if ($formVerif->verifyLoginData($_POST) === false) {
-			return "error : les champs n'ont pas tous été remplis.";
-		}
+		
 		//cryptage mdp
-		$security = new Security;
-		$_POST["pswd"] = $security->cryptPassword($_POST["pswd"]);
+		$_POST["pswd"] = cryptPassword($_POST["pswd"]);
 
 		// Récuperation de la connection
-		$conn = new DataBase();
+		$conn = (new DataBase())->getDataBase();
 		$query = "select * "
 							. "from User "
-							. "where username = " . $POST["login"] . " "
-							. "and password = " . $POST["pswd"] . " "
+							. "where username = " . $_POST["login"] . " "
+							. "and password = " . $_POST["pswd"] . " "
 							. ";";
-		$result = $conn->getDataBase()->exec($query);
+		$result = $conn->exec($query);
 		if (!$result) {
 			return "Mauvais login et/ou mot de passe";
 		}
